@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 
 const Home = () => {
@@ -32,3 +33,12 @@ export default Home;
 // useEffect(() => {
 //   setInterval(reFreshToken(), 30000);
 // }, []);
+=======
+import React from "react";
+
+const Home = () => {
+  return <div>Home</div>;
+};
+
+export default Home;
+>>>>>>> de69956 (테스트)
