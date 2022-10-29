@@ -1,4 +1,6 @@
 .Sidebar {
+  display: block;
+
   width: 335px;
   height: 100vh;
 
