@@ -1,0 +1,61 @@
+.Sidebar {
+  display: block;
+
+  width: 335px;
+  height: 100vh;
+
+  padding: 8px 12px 20px 12px;
+
+  border: 1px solid #dbdbdb;
+
+  z-index: 1;
+}
+
+.SidebarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.SidebarLogo {
+  display: flex;
+  align-items: center;
+  height: 92px;
+}
+
+.SidebarLogoArea {
+  height: 48px;
+
+  margin: 8px 0;
+  padding: 12px;
+}
+
+.SidebarBtnContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.SidebarBtnWrapper {
+  height: 64px;
+}
+
+.SidebarBtnArea {
+  display: flex;
+  align-items: center;
+
+  height: 48px;
+
+  margin: 8px 0;
+  padding: 12px;
+
+  border-radius: 24px;
+}
+
+.SidebarBtnText {
+  display: flex;
+  align-items: center;
+
+  height: 24px;
+
+  padding: 0 0 0 16px;
+}
