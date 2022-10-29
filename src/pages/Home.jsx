@@ -35,9 +35,14 @@ export default Home;
 // }, []);
 =======
 import React from "react";
+import HomeContents from "../components/HomeContents/HomeContents";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <HomeContents />
+    </div>
+  );
 };
 
 export default Home;
