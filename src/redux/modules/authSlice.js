@@ -13,7 +13,7 @@ export const addMemberThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
+); // 회원가입
 
 export const checkInMemberThunk = createAsyncThunk(
   'CHECK_IN_MEMBER',
@@ -37,7 +37,7 @@ export const checkInMemberThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
+); // 로그인
 
 export const reFreshToken = createAsyncThunk(
   'REFRESH_TOKEN',
@@ -51,7 +51,7 @@ export const reFreshToken = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
+); // 토큰 재발급 (진행중)
 
 export const checkOutMemberThunk = createAsyncThunk(
   'CHECK_OUT_MEMBER',
@@ -66,7 +66,7 @@ export const checkOutMemberThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
+); // 로그아웃
 
 const initialState = {
   member: [],
@@ -95,7 +95,6 @@ const authSlice = createSlice({
     [checkInMemberThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.success = true;
-      console.log(action);
     },
     [checkInMemberThunk.pending]: (state) => {
       state.isLoading = true;
