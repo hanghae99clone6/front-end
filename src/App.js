@@ -1,6 +1,6 @@
-import React from 'react';
-import GlobalStyled from './components/GlobalStyled';
-import Router from './shared/Router';
+import React from "react";
+import GlobalStyled from "./components/GlobalStyled";
+import Router from "./shared/Router";
 
 const App = () => {
   return (
