@@ -36,6 +36,10 @@ export default Home;
 =======
 import React from "react";
 import HomeContents from "../components/HomeContents/HomeContents";
+<<<<<<< HEAD
+=======
+import Sidebar from "../components/Sidebar";
+>>>>>>> 008a787 (CRUD 30% 정도완료)
 
 const Home = () => {
   return (

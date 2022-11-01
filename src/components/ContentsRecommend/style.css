@@ -1,0 +1,115 @@
+.ReWrapContainer {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+}
+.MyContainer {
+  width: 350px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.MySection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.UserImg {
+  border: 1px solid rgb(219, 219, 219);
+  width: 52px;
+  height: 52px;
+  border-radius: 50px;
+}
+.UserName {
+  font-size: 16px;
+  font-weight: bold;
+}
+.Transform {
+  font-size: 14px;
+  color: #0095f6;
+}
+.RecommendContainer {
+  width: 350px;
+  height: 19px;
+  margin-top: 10px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.RecommendTitle {
+  color: #bebebe;
+  font-size: 14px;
+  font-weight: bold;
+}
+.RecommendView {
+  font-size: 13px;
+}
+.RecommendList {
+  width: 350px;
+}
+.RecommendBox {
+  height: 48px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.RecommendSection {
+  display: flex;
+  gap: 10px;
+}
+.RecommendListImg {
+  background-image: url(../../assets/img/imagetest1.jpg);
+  border: 1px solid #bebebe;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.RecommendListImg2 {
+  background-image: url(../../assets/img/imagetest2.jpg);
+  border: 1px solid #bebebe;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.RecommendListImg3 {
+  background-image: url(../../assets/img/imagetest3.jpg);
+  border: 1px solid #bebebe;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.RecommendUser {
+  font-weight: bold;
+}
+.RecommendDetail {
+  color: #bebebe;
+  margin-top: 7px;
+}
+.RecommendFollow {
+  color: #0095f6;
+  cursor: pointer;
+}
+.RecommendFooter {
+  width: 195px;
+  color: #c7c7c7;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.FootertextBox {
+  padding: 25px 0;
+}
+@media (max-width: 1551px) {
+  .ReWrapContainer {
+    display: none;
+  }
+}
