@@ -1,5 +1,4 @@
 import React from 'react';
-import './Sidebar.css';
 import { ReactComponent as Instagram_logo } from '../img/Instagram_logo.svg';
 import { ReactComponent as HomeIcon } from '../img/HomeIcon.svg';
 import { ReactComponent as SearchIcon } from '../img/SearchIcon.svg';
@@ -8,86 +7,146 @@ import { ReactComponent as DirectIcon } from '../img/DirectIcon.svg';
 import { ReactComponent as AlertIcon } from '../img/AlertIcon.svg';
 import { ReactComponent as AddPostIcon } from '../img/AddPostIcon.svg';
 import { ReactComponent as HamburgerIcon } from '../img/HamburgerIcon.svg';
+import styled from 'styled-components';
 
-const Header = () => {
+const Sidebar = () => {
   return (
-    <div className="Sidebar">
-      <div className="SidebarContainer">
+    <StSidebar>
+      <SidebarContainer>
         {/* 인스타그램 로고 */}
-        <div className="SidebarLogo">
-          <div className="SidebarLogoArea">
+        <SidebarLogo>
+          <SidebarLogoArea>
             <Instagram_logo width="103px" height="29px" />
-          </div>
-        </div>
+          </SidebarLogoArea>
+        </SidebarLogo>
         {/* 홈버튼 */}
-        <div className="SidebarBtnContainer">
-          <div className="SidebarBtnWrapper">
-            <div className="SidebarBtnArea">
-              <div>
+        <SidebarBtnContainer>
+          <SidebarBtnWrapper>
+            <SidebarBtnArea>
+              <>
                 <HomeIcon />
-              </div>
-              <div className="SidebarBtnText">홈</div>
-            </div>
-          </div>
+              </>
+              <SidebarBtnText>홈</SidebarBtnText>
+            </SidebarBtnArea>
+          </SidebarBtnWrapper>
           {/* 검색 */}
-          <div className="SidebarBtnWrapper">
-            <div className="SidebarBtnArea">
-              <div>
+          <SidebarBtnWrapper>
+            <SidebarBtnArea>
+              <>
                 <SearchIcon />
-              </div>
-              <div className="SidebarBtnText">검색</div>
-            </div>
-          </div>
+              </>
+              <SidebarBtnText>검색</SidebarBtnText>
+            </SidebarBtnArea>
+          </SidebarBtnWrapper>
           {/* 탐색 탭 */}
-          <div className="SidebarBtnWrapper">
-            <div className="SidebarBtnArea">
-              <div>
+          <SidebarBtnWrapper>
+            <SidebarBtnArea>
+              <>
                 <ExploreIcon />
-              </div>
-              <div className="SidebarBtnText">탐색 탭</div>
-            </div>
-          </div>
+              </>
+              <SidebarBtnText>탐색 탭</SidebarBtnText>
+            </SidebarBtnArea>
+          </SidebarBtnWrapper>
           {/* 메시지 */}
-          <div className="SidebarBtnWrapper">
-            <div className="SidebarBtnArea">
-              <div>
+          <SidebarBtnWrapper>
+            <SidebarBtnArea>
+              <>
                 <DirectIcon />
-              </div>
-              <div className="SidebarBtnText">메시지</div>
-            </div>
-          </div>
+              </>
+              <SidebarBtnText>메시지</SidebarBtnText>
+            </SidebarBtnArea>
+          </SidebarBtnWrapper>
           {/* 알림 */}
-          <div className="SidebarBtnWrapper">
-            <div className="SidebarBtnArea">
-              <div>
+          <SidebarBtnWrapper>
+            <SidebarBtnArea>
+              <>
                 <AlertIcon />
-              </div>
-              <div className="SidebarBtnText">알림</div>
-            </div>
-          </div>
+              </>
+              <SidebarBtnText>알림</SidebarBtnText>
+            </SidebarBtnArea>
+          </SidebarBtnWrapper>
           {/* 만들기 */}
-          <div className="SidebarBtnWrapper">
-            <div className="SidebarBtnArea">
-              <div>
+          <SidebarBtnWrapper>
+            <SidebarBtnArea>
+              <>
                 <AddPostIcon />
-              </div>
-              <div className="SidebarBtnText">만들기</div>
-            </div>
-          </div>
+              </>
+              <SidebarBtnText>만들기</SidebarBtnText>
+            </SidebarBtnArea>
+          </SidebarBtnWrapper>
           {/* 프로필 */}
-        </div>
+        </SidebarBtnContainer>
         {/* 더 보기 */}
-        <div className="SidebarBtnWrapper">
-          <div className="SidebarBtnArea">
-            <div>
+        <SidebarBtnWrapper>
+          <SidebarBtnArea>
+            <>
               <HamburgerIcon />
-            </div>
-            <div className="SidebarBtnText">더 보기</div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </>
+            <SidebarBtnText>더 보기</SidebarBtnText>
+          </SidebarBtnArea>
+        </SidebarBtnWrapper>
+      </SidebarContainer>
+    </StSidebar>
   );
 };
 
-export default Header;
+export default Sidebar;
+
+const StSidebar = styled.div`
+  display: block;
+
+  width: 335px;
+  height: 100vh;
+
+  padding: 8px 12px 20px 12px;
+
+  border: 1px solid #dbdbdb;
+
+  z-index: 1;
+`;
+
+const SidebarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const SidebarLogo = styled.div`
+  display: flex;
+  align-items: center;
+  height: 92px;
+`;
+
+const SidebarLogoArea = styled.div`
+  height: 48px;
+
+  margin: 8px 0;
+  padding: 12px;
+`;
+const SidebarBtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const SidebarBtnWrapper = styled.div`
+  height: 64px;
+`;
+
+const SidebarBtnArea = styled.div`
+  display: flex;
+  align-items: center;
+
+  height: 48px;
+
+  margin: 8px 0;
+  padding: 12px;
+
+  border-radius: 24px;
+`;
+const SidebarBtnText = styled.div`
+  display: flex;
+  align-items: center;
+
+  height: 24px;
+
+  padding: 0 0 0 16px;
+`;
