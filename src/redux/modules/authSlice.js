@@ -1,4 +1,3 @@
-
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { removeCookie, setCookie } from '../../lib/cookie';
 import instance from '../../lib/instance';
@@ -27,12 +26,12 @@ export const checkInMemberThunk = createAsyncThunk(
         .then((res) => {
           console.log(res);
           if (res.data.success === false) alert(res.data.error.message);
-          setCookie('Auth', res.request.getResponseHeader('Authorization'), 2);
+          setCookie('Auth', res.request.getResponseHeader('Authorization'), 30);
           setCookie('Refresh', res.request.getResponseHeader('Refresh-Token'));
           sessionStorage.setItem(
             'Access',
             res.request.getResponseHeader('Authorization'),
-            2
+            30
           );
         });
       console.log(data);
@@ -59,7 +58,6 @@ export const checkOutMemberThunk = createAsyncThunk(
   }
 );
 
-
 const initialState = {
   member: [],
   isLoading: false,
@@ -67,7 +65,7 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-  name: "member",
+  name: 'member',
   initialState,
   reducers: {},
   extraReducers: {

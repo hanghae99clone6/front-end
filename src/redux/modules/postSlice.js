@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import instance from '../../lib/instance';
 
-
+// 글 작성하기
 export const addPostThunk = createAsyncThunk(
-  "ADD_CONTENT",
+  'ADD_CONTENT',
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
-      const { data } = await instance.post("/api/auth/posts", payload);
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await instance.post('/api/auth/posts', payload, config);
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -23,7 +29,7 @@ const initialState = {
 };
 
 const postSlice = createSlice({
-  name: "posts",
+  name: 'posts',
   initialState,
   reducers: {},
   extraReducers: {

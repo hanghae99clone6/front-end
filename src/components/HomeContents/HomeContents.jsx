@@ -4,16 +4,14 @@ import ContentsRecommend from '../ContentsRecommend/ContentsRecommend';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { __getPosts } from '../../redux/modules/postSlice';
-
+import { __getPosts } from '../../redux/modules/feedSlice';
 
 const HomeContents = () => {
   const [optionModal, setOptionModal] = useState(false);
   const [myOptionModal, setMyOptionModal] = useState(false);
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.postSlice.posts.data);
-
+  const posts = useSelector((state) => state.postSlice.posts);
   console.log(posts);
 
   useEffect(() => {

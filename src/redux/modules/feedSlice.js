@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import instance from "../../lib/instance";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import instance from '../../lib/instance';
 
 //http://3.34.95.244/ api주소
 
@@ -14,21 +13,19 @@ const initialState = {
 };
 
 export const __getPosts = createAsyncThunk(
-  "posts/getposts",
+  'posts/getposts',
   async (payload, thunkAPI) => {
     try {
-      const data = await instance.get("/api/post");
-      console.log(data.data);
+      const data = await instance.get('/api/post');
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
 export const feedSlice = createSlice({
-  name: "posts",
+  name: 'posts',
   initialState,
   reducers: {},
   extraReducers: {
