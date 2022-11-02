@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import instance from "../../lib/instance";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import instance from '../../lib/instance';
+
 
 export const addPostThunk = createAsyncThunk(
   "ADD_CONTENT",
