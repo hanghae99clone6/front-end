@@ -1,10 +1,10 @@
-import React from "react";
-import ContentsCard from "../ContentsCard/ContentsCard";
-import ContentsRecommend from "../ContentsRecommend/ContentsRecommend";
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { __getPosts } from "../../redux/modules/postSlice";
+import React from 'react';
+import ContentsCard from '../ContentsCard/ContentsCard';
+import ContentsRecommend from '../ContentsRecommend/ContentsRecommend';
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { __getPosts } from '../../redux/modules/postSlice';
 
 const HomeContents = () => {
   const [optionModal, setOptionModal] = useState(false);

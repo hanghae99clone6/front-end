@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPostThunk } from '../redux/modules/postSlice';
 import styled from 'styled-components';
-import dotenv from 'dotenv';
-import AWS from 'aws-sdk';
 
-dotenv.config();
+import AWS from 'aws-sdk';
 
 const S3_BUCKET = 'process.env.REACT_APP_BUCKET';
 const REGION = 'process.env.REACT_APP_AWS_REGION';

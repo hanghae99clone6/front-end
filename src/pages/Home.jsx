@@ -1,8 +1,14 @@
-<<<<<<< HEAD
 import React from 'react';
+import HomeContents from '../components/HomeContents/HomeContents';
+import Sidebar from '../components/Sidebar';
 
 const Home = () => {
-  return <div>Hello World!</div>;
+  return (
+    <div>
+      <Sidebar />
+      <HomeContents />
+    </div>
+  );
 };
 
 export default Home;
@@ -33,21 +39,3 @@ export default Home;
 // useEffect(() => {
 //   setInterval(reFreshToken(), 30000);
 // }, []);
-=======
-import React from "react";
-import HomeContents from "../components/HomeContents/HomeContents";
-<<<<<<< HEAD
-=======
-import Sidebar from "../components/Sidebar";
->>>>>>> 008a787 (CRUD 30% 정도완료)
-
-const Home = () => {
-  return (
-    <div>
-      <HomeContents />
-    </div>
-  );
-};
-
-export default Home;
->>>>>>> de69956 (테스트)
