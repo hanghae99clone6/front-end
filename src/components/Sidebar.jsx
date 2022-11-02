@@ -9,6 +9,7 @@ import { ReactComponent as AddPostIcon } from '../img/AddPostIcon.svg';
 import { ReactComponent as HamburgerIcon } from '../img/HamburgerIcon.svg';
 import styled from 'styled-components';
 
+
 const Sidebar = () => {
   return (
     <StSidebar>

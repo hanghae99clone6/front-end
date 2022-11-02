@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import instance from '../../lib/instance';
 
+
 export const addPostThunk = createAsyncThunk(
-  'ADD_CONTENT',
+  "ADD_CONTENT",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await instance.post('/api/auth/posts', payload);
+      const { data } = await instance.post("/api/auth/posts", payload);
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -22,7 +23,7 @@ const initialState = {
 };
 
 const postSlice = createSlice({
-  name: 'posts',
+  name: "posts",
   initialState,
   reducers: {},
   extraReducers: {

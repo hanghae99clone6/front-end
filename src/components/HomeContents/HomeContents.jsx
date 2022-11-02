@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { __getPosts } from '../../redux/modules/postSlice';
 
+
 const HomeContents = () => {
   const [optionModal, setOptionModal] = useState(false);
   const [myOptionModal, setMyOptionModal] = useState(false);
