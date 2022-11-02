@@ -18,6 +18,12 @@ import PostMyOption from "../PostMyOption";
 import PostEditForm from "../PostEditForm";
 
 const ContentsCard = ({
+  postid,
+  img,
+  like,
+  username,
+  time,
+  content,
   optionModal,
   setOptionModal,
   myOptionModal,
@@ -30,6 +36,12 @@ const ContentsCard = ({
     e.preventDefault();
     setModalOpen(true);
   };
+
+  const posttime = time
+    .substr(5, 5)
+    .replace("-", "AB")
+    .replace("A", "월")
+    .replace("B", " ");
 
   const [userComment, setUserComment] = useState({
     comment: "",
@@ -118,11 +130,11 @@ const ContentsCard = ({
   return (
     <>
       {modalOpen && <ContentsCardDetail setModalOpen={setModalOpen} />}
-      <PostContainer onSubmit={onSubmitHandler}>
+      <PostContainer key={postid} onSubmit={onSubmitHandler}>
         <PostHeader>
           <FirstHeader>
             <UserImg />
-            <UserLabel>이름</UserLabel>
+            <UserLabel>{postid}</UserLabel>
           </FirstHeader>
           <BiDotsHorizontalRounded
             style={{ paddingRight: "15px", cursor: "pointer" }}
@@ -162,15 +174,15 @@ const ContentsCard = ({
         </LikeFirstBar>
         <LikeSecondBar>
           <UserLikeImg />
-          <UserLikeLable>좋아요 0개</UserLikeLable>
+          <UserLikeLable>좋아요 {like}개</UserLikeLable>
         </LikeSecondBar>
         <ContentWrap>
           <ContentFirstSection>
-            <UserLabel>이름</UserLabel>
-            <PostContent>내용</PostContent>
+            <UserLabel>{username}</UserLabel>
+            <PostContent>{content}</PostContent>
           </ContentFirstSection>
           <CommentCount>댓글 0개 보기</CommentCount>
-          <ContentTime>10월 31</ContentTime>
+          <ContentTime>{posttime}</ContentTime>
         </ContentWrap>
         <CommentWrap>
           <CommentFirstSection>
