@@ -91,23 +91,28 @@
 .RecommendUser {
   font-weight: bold;
 }
+
 .RecommendDetail {
   color: #bebebe;
   margin-top: 7px;
 }
+
 .RecommendFollow {
   color: #0095f6;
   cursor: pointer;
 }
+
 .RecommendFooter {
   width: 195px;
   color: #c7c7c7;
   font-size: 12px;
   line-height: 1.5;
 }
+
 .FootertextBox {
   padding: 25px 0;
 }
+
 @media (max-width: 1551px) {
   .ReWrapContainer {
     display: none;

@@ -1,12 +1,10 @@
 import React from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-
 import {
   IoChatbubbleOutline,
   IoPaperPlaneOutline,
   IoBookmarkOutline,
-
 } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
 import Slider from "react-slick";
@@ -18,7 +16,6 @@ import { useDispatch } from "react-redux";
 import PostOption from "../PostOption";
 import PostMyOption from "../PostMyOption";
 import PostEditForm from "../PostEditForm";
-
 
 const ContentsCard = ({
   postid,
@@ -43,13 +40,12 @@ const ContentsCard = ({
   const posttime = time
     .substr(5, 5)
 
-    .replace('-', 'AB')
-    .replace('A', '월')
-    .replace('B', ' ');
+    .replace("-", "AB")
+    .replace("A", "월")
+    .replace("B", " ");
 
   const [userComment, setUserComment] = useState({
-    comment: '',
-
+    comment: "",
   });
 
   const { comment } = userComment;
@@ -70,13 +66,13 @@ const ContentsCard = ({
         className={className}
         style={{
           ...style,
-          display: 'block',
+          display: "block",
           // background: "red",
-          right: '10px',
-          width: '30px',
-          height: '30px',
-          textAlign: 'center',
-          paddingTop: '10px',
+          right: "10px",
+          width: "30px",
+          height: "30px",
+          textAlign: "center",
+          paddingTop: "10px",
           zIndex: 10,
         }}
         onClick={onClick}
@@ -91,13 +87,13 @@ const ContentsCard = ({
         className={className}
         style={{
           ...style,
-          display: 'block',
+          display: "block",
           // background: "green",
-          left: '10px',
-          width: '30px',
-          height: '30px',
-          textAlign: 'center',
-          paddingTop: '10px',
+          left: "10px",
+          width: "30px",
+          height: "30px",
+          textAlign: "center",
+          paddingTop: "10px",
           zIndex: 10,
         }}
         onClick={onClick}
@@ -142,7 +138,7 @@ const ContentsCard = ({
             <UserLabel>{postid}</UserLabel>
           </FirstHeader>
           <BiDotsHorizontalRounded
-            style={{ paddingRight: '15px', cursor: 'pointer' }}
+            style={{ paddingRight: "15px", cursor: "pointer" }}
             onClick={onClickModalHandler}
           />
         </PostHeader>
@@ -150,13 +146,12 @@ const ContentsCard = ({
           <Slider {...settings}>
             <div>
               <img
-                src={image1}
+                src={img}
                 style={{
-                  width: '100%',
-                  height: '500px',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-
+                  width: "100%",
+                  height: "500px",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               />
             </div>
@@ -165,17 +160,17 @@ const ContentsCard = ({
 
         <LikeFirstBar>
           <LikeBarSection>
-            <AiOutlineHeart size="30" style={{ cursor: 'pointer' }} />
+            <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
             <IoChatbubbleOutline
               size="28"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               onClick={showModal}
             />
-            <IoPaperPlaneOutline size="28" style={{ cursor: 'pointer' }} />
+            <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
           </LikeBarSection>
           <IoBookmarkOutline
             size="27"
-            style={{ paddingRight: '10px', cursor: 'pointer' }}
+            style={{ paddingRight: "10px", cursor: "pointer" }}
           />
         </LikeFirstBar>
         <LikeSecondBar>
@@ -192,7 +187,7 @@ const ContentsCard = ({
         </ContentWrap>
         <CommentWrap>
           <CommentFirstSection>
-            <VscSmiley size="26" style={{ padding: '0 10px' }} />
+            <VscSmiley size="26" style={{ padding: "0 10px" }} />
             <CommentInput
               type="text"
               name="comment"
