@@ -1,0 +1,16 @@
+body {
+  background-color: #fafafa;
+}
+.ContentsContainer {
+  width: 850px;
+  height: 90vh;
+  margin: auto;
+  display: flex;
+}
+.ContentsList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}

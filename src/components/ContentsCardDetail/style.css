@@ -1,0 +1,29 @@
+.ModalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(87, 87, 87, 0.5);
+  z-index: 11;
+}
+.ModalDetailContainer {
+  width: 1300px;
+  height: 100%;
+  display: flex;
+  margin: auto;
+
+  align-items: center;
+}
+.ModalPostImg {
+  width: 826px;
+  height: 870px;
+  background-color: #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 1rem 1rem 0.5rem 1rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-position: center;
+  background-size: 100% 100%;
+}
