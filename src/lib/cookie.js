@@ -6,12 +6,10 @@ const cookies = new Cookies();
 //   return cookies.set(name, value, { ...option });
 // };
 
-export const setCookie = (name, value, option) => {
-  let now = new Date();
-  let after1m = new Date();
-  after1m.setMinutes(now.getMinutes() + 60);
-
-  return cookies.set(name, value, { ...option, expires: after1m });
+export const setCookie = (name, value, exp) => {
+  let time = new Date();
+  time.setMinutes(time.getMinutes() + exp);
+  return cookies.set(name, value, { expires: time });
 };
 
 export const getCookie = (name) => {
@@ -21,9 +19,3 @@ export const getCookie = (name) => {
 export const removeCookie = (name) => {
   return cookies.remove(name);
 };
-
-export function logout() {
-  cookies.remove('token');
-  cookies.remove('Refresh-Token');
-  sessionStorage.clear();
-}

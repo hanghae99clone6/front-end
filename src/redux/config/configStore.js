@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import React from 'react';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import authSlice from '../modules/authSlice';
+import postSlice from '../modules/postSlice';
 
-const store = (configureStore = {
-  reducer: {},
+const store = configureStore({
+  reducer: { authSlice, postSlice },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
-export default configureStore;
+export default store;
