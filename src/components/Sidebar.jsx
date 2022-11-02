@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as Instagram_Logo } from '../img/Instagram_Logo.svg';
 import { ReactComponent as HomeIcon } from '../img/HomeIcon.svg';
 import { ReactComponent as SearchIcon } from '../img/SearchIcon.svg';
@@ -8,9 +8,23 @@ import { ReactComponent as AlertIcon } from '../img/AlertIcon.svg';
 import { ReactComponent as AddPostIcon } from '../img/AddPostIcon.svg';
 import { ReactComponent as HamburgerIcon } from '../img/HamburgerIcon.svg';
 import styled from 'styled-components';
-
+import { useNavigate } from 'react-router-dom';
+import Modal from './Modal';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+
+  //모달창 열기
+  const showModal = () => {
+    setIsModalOpen(!IsModalOpen);
+  };
+
+  //모달창 닫기
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <StSidebar>
       <SidebarContainer>
@@ -68,7 +82,8 @@ const Sidebar = () => {
           </SidebarBtnWrapper>
           {/* 만들기 */}
           <SidebarBtnWrapper>
-            <SidebarBtnArea>
+            {/* 만들기 버튼을 누르면 모달이 나온다. */}
+            <SidebarBtnArea onClick={showModal}>
               <>
                 <AddPostIcon />
               </>
@@ -88,6 +103,11 @@ const Sidebar = () => {
         </SidebarBtnWrapper>
       </SidebarContainer>
     </StSidebar>
+
+    // {IsModalOpen? (
+    //   <Modal/>
+
+    // )}
   );
 };
 
@@ -125,10 +145,12 @@ const SidebarLogoArea = styled.div`
   margin: 8px 0;
   padding: 12px;
 `;
+
 const SidebarBtnContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const SidebarBtnWrapper = styled.div`
   height: 64px;
 `;
@@ -143,7 +165,15 @@ const SidebarBtnArea = styled.div`
   padding: 12px;
 
   border-radius: 24px;
+
+  cursor: pointer;
+
+  :hover {
+    transform: scale(1.02);
+    transition: all 0.5 ease;
+  }
 `;
+
 const SidebarBtnText = styled.div`
   display: flex;
   align-items: center;

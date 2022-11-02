@@ -123,7 +123,7 @@ const SignUp = () => {
               maxLength={16}
               placeholder="비밀번호 확인"
             />
-            <AuthBtn>가입</AuthBtn>
+            <AuthBtn onClick={onClickSignUp}>가입</AuthBtn>
           </AuthInputBox>
         </AuthFirstBoxUp>
         <AuthSecondBox>

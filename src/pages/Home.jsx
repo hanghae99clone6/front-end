@@ -1,15 +1,12 @@
-
 import React from 'react';
 import HomeContents from '../components/HomeContents/HomeContents';
 import Sidebar from '../components/Sidebar';
-
 
 const Home = () => {
   return (
     <div>
       <Sidebar />
       <HomeContents />
-      Hello World!
     </div>
   );
 };
@@ -42,4 +39,3 @@ export default Home;
 // useEffect(() => {
 //   setInterval(reFreshToken(), 30000);
 // }, []);
-

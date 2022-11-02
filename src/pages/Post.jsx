@@ -2,11 +2,11 @@ import React from 'react';
 import Modal from '../components/Modal';
 import PostForm from '../components/PostForm';
 
-const Post = () => {
+const Post = ({ showModal, setIsModalOpen }) => {
   return (
     <div>
       <Modal>
-        <PostForm />
+        <PostForm setIsModalOpen={showModal} />
       </Modal>
     </div>
   );
