@@ -1,3 +1,4 @@
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { removeCookie, setCookie } from '../../lib/cookie';
 import instance from '../../lib/instance';
@@ -58,6 +59,7 @@ export const checkOutMemberThunk = createAsyncThunk(
   }
 );
 
+
 const initialState = {
   member: [],
   isLoading: false,
@@ -65,7 +67,7 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-  name: 'member',
+  name: "member",
   initialState,
   reducers: {},
   extraReducers: {

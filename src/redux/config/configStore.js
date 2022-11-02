@@ -7,6 +7,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),
+
 });
 
 export default store;
