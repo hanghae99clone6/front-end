@@ -7,6 +7,7 @@ const Home = () => {
     <div>
       <Sidebar />
       <HomeContents />
+      Hello World!
     </div>
   );
 };
