@@ -11,7 +11,7 @@ const HomeContents = () => {
   const [myOptionModal, setMyOptionModal] = useState(false);
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.postSlice.posts.data);
 
   console.log(posts);
 
@@ -34,13 +34,25 @@ const HomeContents = () => {
   return (
     <MainContainer fixedHeight={optionModal}>
       <MainList>
-        {/* 컨텐츠카드는 데이터 불러와서 map 돌릴예정 */}
-        <ContentsCard
-          optionModal={optionModal}
-          setOptionModal={setOptionModal}
-          myOptionModal={myOptionModal}
-          setMyOptionModal={setMyOptionModal}
-        />
+        {/* 게시글 전체조회 map */}
+        {posts &&
+          posts.map((post) => (
+            <>
+              <ContentsCard
+                key={post.postId}
+                postid={post.postId}
+                img={post.imageUrl}
+                like={post.like}
+                username={post.name}
+                time={post.modifiedAt}
+                content={post.content}
+                optionModal={optionModal}
+                setOptionModal={setOptionModal}
+                myOptionModal={myOptionModal}
+                setMyOptionModal={setMyOptionModal}
+              />
+            </>
+          ))}
       </MainList>
       <ContentsRecommend />
     </MainContainer>
