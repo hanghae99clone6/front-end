@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie, setCookie } from './cookie';
+import { getCookie } from './cookie';
 
 const reissue = axios.create({
   baseURL: process.env.REACT_APP_BASEURL,
@@ -9,26 +9,13 @@ const reissue = axios.create({
     'Access-Control-Allow-Origin': '*',
     'Refresh-Token': `${getCookie('Refresh')}`,
   },
-  // withCredentials: true,
 });
-
-// const Access = getCookie('Access');
-
-// if (Access !== null) {
-//   const ReissueToken = Access.substring(7);
-//   axios.defaults.headers.common['Access_Token'] = ReissueToken
-//     ? `${ReissueToken}`
-//     : null;
-//   console.log(ReissueToken);
-// }
-
-export default reissue;
 
 reissue.interceptors.request.use(
   (config) => {
-    const Access_Token = getCookie('Access');
+    const Access_Token = sessionStorage.getItem('Access');
     if (Access_Token !== null) {
-      config.headers['Access_Token'] = Access_Token;
+      config.headers.Access_Token = Access_Token.substring(7);
     }
     return config;
   },
@@ -39,9 +26,13 @@ reissue.interceptors.request.use(
 );
 
 reissue.interceptors.response.use(
-  (response) => {},
+  (response) => {
+    return response;
+  },
   (error) => {
     console.log(error);
     return Promise.reject(error);
   }
 );
+
+export default reissue;

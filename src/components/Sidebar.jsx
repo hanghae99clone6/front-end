@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Instagram_logo } from '../img/Instagram_logo.svg';
+import { ReactComponent as Instagram_Logo } from '../img/Instagram_Logo.svg';
 import { ReactComponent as HomeIcon } from '../img/HomeIcon.svg';
 import { ReactComponent as SearchIcon } from '../img/SearchIcon.svg';
 import { ReactComponent as ExploreIcon } from '../img/ExploreIcon.svg';
@@ -16,7 +16,7 @@ const Sidebar = () => {
         {/* 인스타그램 로고 */}
         <SidebarLogo>
           <SidebarLogoArea>
-            <Instagram_logo width="103px" height="29px" />
+            <Instagram_Logo width="103px" height="29px" />
           </SidebarLogoArea>
         </SidebarLogo>
         {/* 홈버튼 */}

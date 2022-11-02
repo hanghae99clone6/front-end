@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Instagram_logo } from '../img/Instagram_logo.svg';
+import { ReactComponent as Instagram_Logo } from '../img/Instagram_Logo.svg';
 import AuthForm from '../components/SignForm';
 import { useDispatch } from 'react-redux';
 import { addMemberThunk } from '../redux/modules/authSlice';
@@ -66,7 +66,7 @@ const SignUp = () => {
       <AuthFormContainer>
         <AuthFirstBoxUp>
           <AuthLogoBox>
-            <Instagram_logo width="175px" height="55px" />
+            <Instagram_Logo width="175px" height="55px" />
           </AuthLogoBox>
           <AuthInputBox>
             <div

@@ -4,7 +4,6 @@ import instance from '../../lib/instance';
 export const addPostThunk = createAsyncThunk(
   'ADD_CONTENT',
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const { data } = await instance.post('/api/auth/posts', payload);
       console.log(data);

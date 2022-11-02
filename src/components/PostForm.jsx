@@ -2,15 +2,61 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPostThunk } from '../redux/modules/postSlice';
 import styled from 'styled-components';
+import dotenv from 'dotenv';
+import AWS from 'aws-sdk';
+
+dotenv.config();
+
+const S3_BUCKET = 'process.env.REACT_APP_BUCKET';
+const REGION = 'process.env.REACT_APP_AWS_REGION';
+const ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
+const SECRETACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY_ID;
 
 const PostForm = () => {
   const dispatch = useDispatch();
   const [write, setWrite] = useState();
 
-  const onClick = () => {
-    dispatch(addPostThunk({ content: write }));
-    setWrite('');
+  AWS.config.update({
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRETACCESS_KEY,
+  });
+
+  const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET },
+    region: REGION,
+  });
+
+  const [progress, setProgress] = useState(0);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // const onChange = (e) => {
+  //   setWrite(e.target.value);
+  // };
+
+  const handleFileInput = (e) => {
+    setSelectedFile(e.target.files[0]);
   };
+
+  const uploadFile = (file) => {
+    const params = {
+      ACL: 'public-read',
+      Body: file,
+      Bucket: S3_BUCKET,
+      Key: file.name,
+    };
+
+    myBucket
+      .putObject(params)
+      .on('httpUploadProgress', (evt) => {
+        setProgress(Math.round((evt.loaded / evt.total) * 100));
+      })
+      .send((err) => {
+        if (err) console.log(err);
+      });
+  };
+
+  // dispatch(addPostThunk({ content: write }));
+  // setWrite('');
 
   return (
     <StPostForm>
@@ -18,18 +64,20 @@ const PostForm = () => {
         <PostFormHeader>
           <div style={{ cursor: 'pointer' }}>이전으로</div>
           <div style={{ fontSize: '16px' }}>새 게시물 만들기</div>
-          <div style={{ cursor: 'pointer' }} onClick={onClick}>
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={() => uploadFile(selectedFile)}
+          >
             공유하기
           </div>
         </PostFormHeader>
         <PostFormInput>
           <PostFormUpload>
-            <input type="file" />
+            <input type="file" onChange={handleFileInput} />
           </PostFormUpload>
           <PostFormArea
             type="text"
-            value={write}
-            onChange={(e) => setWrite(e.target.value)}
+            // onChange={onChange}
             className="WriteFormArea"
             placeholder="문구 입력..."
           />
@@ -103,3 +151,22 @@ const PostFormArea = styled.textarea`
     outline: none;
   }
 `;
+
+// const config = {
+//   bucketName: S3_BUCKET,
+//   region: REGION,
+//   accessKeyId: ACCESS_KEY,
+//   secretAccessKey: SECRETACCESS_KEY,
+// };
+
+// const [selectedFile, setSelectedFile] = useState(null);
+
+// const handleFileInput = (e) => {
+//   setSelectedFile(e.target.files[0]);
+// };
+
+// const handleUpload = async (file) => {
+//   uploadFile(file, config)
+//     .then((data) => console.log(data))
+//     .catch((err) => console.error(err));
+// };

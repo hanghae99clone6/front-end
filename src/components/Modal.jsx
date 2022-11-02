@@ -3,17 +3,15 @@ import styled from 'styled-components';
 
 const Modal = ({ children }) => {
   return (
-    <div class="container">
-      <StModalPopUp>
-        <StModalPop>
-          <StModalBody>
-            <StModalBodyContent>
-              <StModalBodyTitleBox>{children}</StModalBodyTitleBox>
-            </StModalBodyContent>
-          </StModalBody>
-        </StModalPop>
-      </StModalPopUp>
-    </div>
+    <StModalPopUp>
+      <StModalPop>
+        <StModalBody>
+          <StModalBodyContent>
+            <StModalBodyTitleBox>{children}</StModalBodyTitleBox>
+          </StModalBodyContent>
+        </StModalBody>
+      </StModalPop>
+    </StModalPopUp>
   );
 };
 

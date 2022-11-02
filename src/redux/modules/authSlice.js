@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { removeCookie, setCookie } from '../../lib/cookie';
 import instance from '../../lib/instance';
-import reissue from '../../lib/reissue';
 
+// 회원가입
 export const addMemberThunk = createAsyncThunk(
   'ADD_MEMBER',
   async (payload, thunkAPI) => {
@@ -13,46 +13,36 @@ export const addMemberThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-); // 회원가입
+);
 
+// 로그인
 export const checkInMemberThunk = createAsyncThunk(
   'CHECK_IN_MEMBER',
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
       const { data } = await instance
         .post('/api/member/login', payload)
         .then((res) => {
+          console.log(res);
           if (res.data.success === false) alert(res.data.error.message);
           setCookie('Auth', res.request.getResponseHeader('Authorization'), 2);
-          setCookie(
+          setCookie('Refresh', res.request.getResponseHeader('Refresh-Token'));
+          sessionStorage.setItem(
             'Access',
             res.request.getResponseHeader('Authorization'),
             2
           );
-          setCookie('Refresh', res.request.getResponseHeader('Refresh-Token'));
-          setInterval(reFreshToken, 60000);
         });
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
-); // 로그인
+);
 
-export const reFreshToken = createAsyncThunk(
-  'REFRESH_TOKEN',
-  async (payload, thunkAPI) => {
-    try {
-      await reissue.post('/api/member/reissue').then((res) => {
-        setCookie('Access', res.request.getResponseHeader('Authorization'), 2);
-      });
-      return thunkAPI.fulfillWithValue(true);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-); // 토큰 재발급 (진행중)
-
+// 로그아웃
 export const checkOutMemberThunk = createAsyncThunk(
   'CHECK_OUT_MEMBER',
   async (payload, thunkAPI) => {
@@ -66,7 +56,7 @@ export const checkOutMemberThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-); // 로그아웃
+);
 
 const initialState = {
   member: [],
