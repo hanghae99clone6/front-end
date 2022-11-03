@@ -17,6 +17,7 @@ import {
   AuthSecondBox,
   AuthThirdBox,
 } from '../components/SignForm';
+import styled from 'styled-components';
 
 const EnterSignIn = () => {
   const navigate = useNavigate();
@@ -48,8 +49,13 @@ const EnterSignIn = () => {
     if (e.key === 'Enter') onClickSignIn();
   };
 
+  const MainImg = styled.img`
+    margin-bottom: 50px;
+  `;
+
   return (
     <AuthSign>
+      <MainImg src={require('../img/Group.png')} style={{ height: '680px' }} />
       <AuthFormContainer>
         <AuthFirstBoxIn>
           <AuthLogoBox>
