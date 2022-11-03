@@ -5,7 +5,15 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import instance from "../../lib/instance";
 
-const ContentsCardDetail = ({ setModalOpen, postid }) => {
+const ContentsCardDetail = ({
+  setModalOpen,
+  postid,
+  img,
+  like,
+  username,
+  usercontent,
+  time,
+}) => {
   const closeModal = (e) => {
     setModalOpen(false);
   };
@@ -28,7 +36,7 @@ const ContentsCardDetail = ({ setModalOpen, postid }) => {
       <PostDetailContainer>
         <PostImg>
           <img
-            src={image1}
+            src={img}
             style={{
               width: "100%",
               height: "830px",
@@ -38,7 +46,14 @@ const ContentsCardDetail = ({ setModalOpen, postid }) => {
           />
         </PostImg>
         {/* 디테일폼 셀렉트받아와서 전달할예정  */}
-        <PostDetailForm setModalOpen={setModalOpen} />
+        <PostDetailForm
+          setModalOpen={setModalOpen}
+          like={like}
+          username={username}
+          usercontent={usercontent}
+          time={time}
+          postid={postid}
+        />
       </PostDetailContainer>
     </Background>
   );
