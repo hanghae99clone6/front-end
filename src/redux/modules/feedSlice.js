@@ -5,13 +5,6 @@ import instance from '../../lib/instance';
 
 //정건희 박성우 김연중 이호진 강병욱 안성후
 
-const initialState = {
-  posts: [],
-  comment: null,
-  isLoading: false,
-  error: null,
-};
-
 export const __getPosts = createAsyncThunk(
   'posts/getposts',
   async (payload, thunkAPI) => {
@@ -23,6 +16,13 @@ export const __getPosts = createAsyncThunk(
     }
   }
 );
+
+const initialState = {
+  posts: [],
+  comment: null,
+  isLoading: false,
+  error: null,
+};
 
 export const feedSlice = createSlice({
   name: 'posts',

@@ -11,7 +11,7 @@ const HomeContents = () => {
   const [myOptionModal, setMyOptionModal] = useState(false);
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.postSlice.posts);
+  const posts = useSelector((state) => state.feedSlice.posts.data);
   console.log(posts);
 
   useEffect(() => {
