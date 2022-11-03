@@ -88,26 +88,58 @@
   background-position: center;
   background-size: 100% 100%;
 }
+.RecommendListImg4 {
+  background-image: url(../../assets/img/imagetest4.jpg);
+  border: 1px solid #bebebe;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.RecommendListImg5 {
+  background-image: url(../../assets/img/imagetest5.jpg);
+  border: 1px solid #bebebe;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.RecommendListImg6 {
+  background-image: url(../../assets/img/imagetest2.jpg);
+  border: 1px solid #bebebe;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: 100% 100%;
+}
 .RecommendUser {
   font-weight: bold;
 }
+
 .RecommendDetail {
   color: #bebebe;
   margin-top: 7px;
 }
+
 .RecommendFollow {
   color: #0095f6;
   cursor: pointer;
 }
+
 .RecommendFooter {
   width: 195px;
   color: #c7c7c7;
   font-size: 12px;
   line-height: 1.5;
 }
+
 .FootertextBox {
   padding: 25px 0;
 }
+
 @media (max-width: 1551px) {
   .ReWrapContainer {
     display: none;
