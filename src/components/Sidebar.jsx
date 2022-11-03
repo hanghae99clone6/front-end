@@ -11,8 +11,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';
 import PostForm from './PostForm';
+import { useDispatch } from 'react-redux';
+import { checkOutMemberThunk } from '../redux/modules/authSlice';
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -102,7 +105,16 @@ const Sidebar = () => {
             <>
               <HamburgerIcon />
             </>
-            <SidebarBtnText>더 보기</SidebarBtnText>
+            <SidebarBtnText
+              onClick={() => {
+                dispatch(checkOutMemberThunk());
+                alert('로그아웃 되었습니다.');
+                navigate('/');
+                window.location.reload();
+              }}
+            >
+              로그아웃
+            </SidebarBtnText>
           </SidebarBtnArea>
         </SidebarBtnWrapper>
       </SidebarContainer>
