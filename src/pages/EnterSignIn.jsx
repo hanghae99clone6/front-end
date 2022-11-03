@@ -18,7 +18,7 @@ import {
   AuthThirdBox,
 } from '../components/SignForm';
 
-const SignIn = () => {
+const EnterSignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [signIn, setSignIn] = useState({
@@ -41,7 +41,7 @@ const SignIn = () => {
         password: signIn.password,
       })
     );
-    navigate('/home');
+    navigate('/');
   };
 
   const onKeyPress = (e) => {
@@ -114,4 +114,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default EnterSignIn;

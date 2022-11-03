@@ -37,7 +37,7 @@ const ContentsRecommend = () => {
             <div className="RecommendListImg" />
             <div className="RecommendInfo">
               <div className="RecommendUser">seongwoo</div>
-              <div className="RecommendDetail">건희님이 팔로우합니다.</div>
+              <div className="RecommendDetail">성우님이 팔로우합니다.</div>
             </div>
           </div>
           <div className="RecommendFollow" onClick={follow}>
@@ -49,7 +49,7 @@ const ContentsRecommend = () => {
             <div className="RecommendListImg2" />
             <div className="RecommendInfo">
               <div className="RecommendUser">geonhee</div>
-              <div className="RecommendDetail">성우님이 팔로우합니다.</div>
+              <div className="RecommendDetail">건희님이 팔로우합니다.</div>
             </div>
           </div>
           <div className="RecommendFollow" onClick={follow2}>
@@ -61,7 +61,43 @@ const ContentsRecommend = () => {
             <div className="RecommendListImg3" />
             <div className="RecommendInfo">
               <div className="RecommendUser">yeonjoong</div>
-              <div className="RecommendDetail">건희님이 팔로우합니다.</div>
+              <div className="RecommendDetail">연중님이 팔로우합니다.</div>
+            </div>
+          </div>
+          <div className="RecommendFollow" onClick={follow3}>
+            {state3}
+          </div>
+        </div>
+        <div className="RecommendBox">
+          <div className="RecommendSection">
+            <div className="RecommendListImg4" />
+            <div className="RecommendInfo">
+              <div className="RecommendUser">byungwook</div>
+              <div className="RecommendDetail">병욱님이 팔로우합니다.</div>
+            </div>
+          </div>
+          <div className="RecommendFollow" onClick={follow3}>
+            {state3}
+          </div>
+        </div>
+        <div className="RecommendBox">
+          <div className="RecommendSection">
+            <div className="RecommendListImg5" />
+            <div className="RecommendInfo">
+              <div className="RecommendUser">seonghu</div>
+              <div className="RecommendDetail">성후님이 팔로우합니다.</div>
+            </div>
+          </div>
+          <div className="RecommendFollow" onClick={follow3}>
+            {state3}
+          </div>
+        </div>
+        <div className="RecommendBox">
+          <div className="RecommendSection">
+            <div className="RecommendListImg6" />
+            <div className="RecommendInfo">
+              <div className="RecommendUser">hojin</div>
+              <div className="RecommendDetail">호진님이 팔로우합니다.</div>
             </div>
           </div>
           <div className="RecommendFollow" onClick={follow3}>

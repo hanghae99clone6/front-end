@@ -7,8 +7,6 @@ import {
   IoBookmarkOutline,
 } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
-import Slider from "react-slick";
-import image1 from "../../assets/img/image1.jpg";
 import { useState } from "react";
 import ContentsCardDetail from "../ContentsCardDetail/ContentsCardDetail";
 import styled from "styled-components";
@@ -16,6 +14,7 @@ import { useDispatch } from "react-redux";
 import PostOption from "../PostOption";
 import PostMyOption from "../PostMyOption";
 import PostEditForm from "../PostEditForm";
+import { postComments } from "../../redux/modules/feedSlice";
 
 const ContentsCard = ({
   postid,
@@ -23,7 +22,7 @@ const ContentsCard = ({
   like,
   username,
   time,
-  content,
+  usercontent,
   optionModal,
   setOptionModal,
   myOptionModal,
@@ -45,10 +44,12 @@ const ContentsCard = ({
     .replace("B", " ");
 
   const [userComment, setUserComment] = useState({
-    comment: "",
+    content: "",
   });
 
-  const { comment } = userComment;
+  const { content } = userComment;
+
+  console.log(userComment);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -118,9 +119,15 @@ const ContentsCard = ({
     setEditInsta(true);
   };
 
+  // 댓글달기
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // 코멘트 디스패치할 예쩡
+    dispatch(
+      postComments({
+        postId: postid,
+        content: content,
+      })
+    );
   };
 
   const onClickModalHandler = () => {
@@ -130,12 +137,14 @@ const ContentsCard = ({
 
   return (
     <>
-      {modalOpen && <ContentsCardDetail setModalOpen={setModalOpen} />}
-      <PostContainer key={postid} onSubmit={onSubmitHandler}>
+      {modalOpen && (
+        <ContentsCardDetail setModalOpen={setModalOpen} postid={postid} />
+      )}
+      <PostContainer onSubmit={onSubmitHandler}>
         <PostHeader>
           <FirstHeader>
             <UserImg />
-            <UserLabel>{postid}</UserLabel>
+            <UserLabel>{username}</UserLabel>
           </FirstHeader>
           <BiDotsHorizontalRounded
             style={{ paddingRight: "15px", cursor: "pointer" }}
@@ -143,19 +152,15 @@ const ContentsCard = ({
           />
         </PostHeader>
         <PostImg>
-          <Slider {...settings}>
-            <div>
-              <img
-                src={img}
-                style={{
-                  width: "100%",
-                  height: "500px",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-            </div>
-          </Slider>
+          <img
+            src={img}
+            style={{
+              width: "100%",
+              height: "500px",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
         </PostImg>
 
         <LikeFirstBar>
@@ -190,8 +195,8 @@ const ContentsCard = ({
             <VscSmiley size="26" style={{ padding: "0 10px" }} />
             <CommentInput
               type="text"
-              name="comment"
-              value={comment}
+              name="content"
+              value={content}
               onChange={onChangeHandler}
             />
           </CommentFirstSection>

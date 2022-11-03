@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import instance from "../../lib/instance";
 
 //http://3.34.95.244/ api주소
@@ -11,18 +10,46 @@ const initialState = {
   comment: null,
   isLoading: false,
   error: null,
+  post: null,
 };
 
-export const __getPosts = createAsyncThunk(
+export const getPosts = createAsyncThunk(
   "posts/getposts",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get("http://3.34.95.244/api/post");
+      const { data } = await instance.get("/api/post");
       console.log(data.data);
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getPost = createAsyncThunk(
+  "posts/getposts",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await instance.get(`/api/post/${payload}`);
+      console.log(data.data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const postComments = createAsyncThunk(
+  "insta/postComments",
+  async (payload, thunkAPI) => {
+    console.log("payload", payload);
+    try {
+      const { data } = await instance.post(`/api/comment`);
+      console.log("data", data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log(error, error);
+      return thunkAPI.rejectWithValue("ERROR=>", error);
     }
   }
 );
@@ -32,14 +59,25 @@ export const feedSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [__getPosts.pending]: (state) => {
+    [getPosts.pending]: (state) => {
       state.isLoading = true;
     },
-    [__getPosts.fulfilled]: (state, action) => {
+    [getPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts = action.payload;
     },
-    [__getPosts.rejected]: (state, action) => {
+    [getPosts.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [postComments.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [postComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.comment = action.payload;
+    },
+    [postComments.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
