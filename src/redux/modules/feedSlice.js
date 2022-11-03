@@ -44,7 +44,8 @@ export const postComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("payload", payload);
     try {
-      const { data } = await instance.post(`/api/comment`);
+      const config = {};
+      const { data } = await instance.post(`/api/auth/comment`, payload);
       console.log("data", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {

@@ -138,7 +138,14 @@ const ContentsCard = ({
   return (
     <>
       {modalOpen && (
-        <ContentsCardDetail setModalOpen={setModalOpen} postid={postid} />
+        <ContentsCardDetail
+          setModalOpen={setModalOpen}
+          postid={postid}
+          img={img}
+          like={like}
+          username={username}
+          usercontent={usercontent}
+        />
       )}
       <PostContainer onSubmit={onSubmitHandler}>
         <PostHeader>
@@ -185,7 +192,7 @@ const ContentsCard = ({
         <ContentWrap>
           <ContentFirstSection>
             <UserLabel>{username}</UserLabel>
-            <PostContent>{content}</PostContent>
+            <PostContent>{usercontent}</PostContent>
           </ContentFirstSection>
           <CommentCount>댓글 0개 보기</CommentCount>
           <ContentTime>{posttime}</ContentTime>
