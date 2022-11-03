@@ -42,7 +42,7 @@ const EnterSignIn = () => {
         password: signIn.password,
       })
     );
-    navigate('/');
+    navigate('/home');
   };
 
   const onKeyPress = (e) => {

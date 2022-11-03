@@ -17,6 +17,7 @@ const PostForm = ({ close }) => {
   });
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // 이미지 미리보기
   const changeHandler = (e) => {
@@ -76,7 +77,7 @@ const PostForm = ({ close }) => {
     dispatch(addPostThunk(formData));
     // 그리고 홈화면으로 이동
     navigate('/home');
-    setPostDto('');
+    setModalOpen(false);
   };
 
   return (
