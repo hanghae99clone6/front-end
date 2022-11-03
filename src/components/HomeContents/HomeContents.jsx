@@ -1,10 +1,10 @@
-import React from 'react';
-import ContentsCard from '../ContentsCard/ContentsCard';
-import ContentsRecommend from '../ContentsRecommend/ContentsRecommend';
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { __getPosts } from '../../redux/modules/feedSlice';
+import React from "react";
+import ContentsCard from "../ContentsCard/ContentsCard";
+import ContentsRecommend from "../ContentsRecommend/ContentsRecommend";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { getPosts } from "../../redux/modules/feedSlice";
 
 const HomeContents = () => {
   const [optionModal, setOptionModal] = useState(false);
@@ -12,10 +12,13 @@ const HomeContents = () => {
   const dispatch = useDispatch();
 
   const posts = useSelector((state) => state.feedSlice.posts.data);
+
   console.log(posts);
 
+  console.log(process.env.REACT_APP_BASEURL);
+
   useEffect(() => {
-    dispatch(__getPosts());
+    dispatch(getPosts());
   }, [dispatch]);
 
   // 게시글 전체조회 API 항목들
@@ -38,17 +41,17 @@ const HomeContents = () => {
           posts.map((post) => (
             <>
               <ContentsCard
-                key={post.postId}
                 postid={post.postId}
                 img={post.imageUrl}
                 like={post.like}
                 username={post.name}
                 time={post.modifiedAt}
-                content={post.content}
+                usercontent={post.content}
                 optionModal={optionModal}
                 setOptionModal={setOptionModal}
                 myOptionModal={myOptionModal}
                 setMyOptionModal={setMyOptionModal}
+                key={post.postId}
               />
             </>
           ))}

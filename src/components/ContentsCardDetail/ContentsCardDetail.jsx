@@ -2,85 +2,58 @@ import React from "react";
 import image1 from "../../assets/img/image1.jpg";
 import PostDetailForm from "../PostDetailForm/PostDetailForm";
 import styled from "styled-components";
-import Slider from "react-slick";
+import { useDispatch, useSelector } from "react-redux";
+import instance from "../../lib/instance";
 
-const ContentsCardDetail = ({ setModalOpen }) => {
+const ContentsCardDetail = ({
+  setModalOpen,
+  postid,
+  img,
+  like,
+  username,
+  usercontent,
+  time,
+}) => {
   const closeModal = (e) => {
     setModalOpen(false);
   };
 
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "block",
-          // background: "red",
-          right: "10px",
-          width: "30px",
-          height: "30px",
-          textAlign: "center",
-          paddingTop: "10px",
-          zIndex: 10,
-        }}
-        onClick={onClick}
-      />
-    );
-  }
+  console.log("디테일postid", postid);
 
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "block",
-          // background: "green",
-          left: "10px",
-          width: "30px",
-          height: "30px",
-          textAlign: "center",
-          paddingTop: "10px",
-          zIndex: 10,
-        }}
-        onClick={onClick}
-      />
-    );
-  }
+  const dispatch = useDispatch();
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+  const getPost = async () => {
+    try {
+      const data = await instance.get(`/api/post/${postid}`);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <Background onClick={closeModal}>
       <PostDetailContainer>
         <PostImg>
-          <Slider {...settings}>
-            <div>
-              <img
-                src={image1}
-                style={{
-                  width: "100%",
-                  height: "830px",
-                  backgroundSize: "100% 100%",
-                  backgroundPosition: "center",
-                }}
-              />
-            </div>
-          </Slider>
+          <img
+            src={img}
+            style={{
+              width: "100%",
+              height: "830px",
+              backgroundSize: "100% 100%",
+              backgroundPosition: "center",
+            }}
+          />
         </PostImg>
         {/* 디테일폼 셀렉트받아와서 전달할예정  */}
-        <PostDetailForm setModalOpen={setModalOpen} />
+        <PostDetailForm
+          setModalOpen={setModalOpen}
+          like={like}
+          username={username}
+          usercontent={usercontent}
+          time={time}
+          postid={postid}
+        />
       </PostDetailContainer>
     </Background>
   );

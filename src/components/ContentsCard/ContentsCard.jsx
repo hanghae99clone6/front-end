@@ -1,16 +1,12 @@
 import React from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-
 import {
   IoChatbubbleOutline,
   IoPaperPlaneOutline,
   IoBookmarkOutline,
-
 } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
-import Slider from "react-slick";
-import image1 from "../../assets/img/image1.jpg";
 import { useState } from "react";
 import ContentsCardDetail from "../ContentsCardDetail/ContentsCardDetail";
 import styled from "styled-components";
@@ -18,7 +14,7 @@ import { useDispatch } from "react-redux";
 import PostOption from "../PostOption";
 import PostMyOption from "../PostMyOption";
 import PostEditForm from "../PostEditForm";
-
+import { postComments } from "../../redux/modules/feedSlice";
 
 const ContentsCard = ({
   postid,
@@ -26,7 +22,7 @@ const ContentsCard = ({
   like,
   username,
   time,
-  content,
+  usercontent,
   optionModal,
   setOptionModal,
   myOptionModal,
@@ -43,16 +39,17 @@ const ContentsCard = ({
   const posttime = time
     .substr(5, 5)
 
-    .replace('-', 'AB')
-    .replace('A', '월')
-    .replace('B', ' ');
+    .replace("-", "AB")
+    .replace("A", "월")
+    .replace("B", " ");
 
   const [userComment, setUserComment] = useState({
-    comment: '',
-
+    content: "",
   });
 
-  const { comment } = userComment;
+  const { content } = userComment;
+
+  console.log(userComment);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -70,13 +67,13 @@ const ContentsCard = ({
         className={className}
         style={{
           ...style,
-          display: 'block',
+          display: "block",
           // background: "red",
-          right: '10px',
-          width: '30px',
-          height: '30px',
-          textAlign: 'center',
-          paddingTop: '10px',
+          right: "10px",
+          width: "30px",
+          height: "30px",
+          textAlign: "center",
+          paddingTop: "10px",
           zIndex: 10,
         }}
         onClick={onClick}
@@ -91,13 +88,13 @@ const ContentsCard = ({
         className={className}
         style={{
           ...style,
-          display: 'block',
+          display: "block",
           // background: "green",
-          left: '10px',
-          width: '30px',
-          height: '30px',
-          textAlign: 'center',
-          paddingTop: '10px',
+          left: "10px",
+          width: "30px",
+          height: "30px",
+          textAlign: "center",
+          paddingTop: "10px",
           zIndex: 10,
         }}
         onClick={onClick}
@@ -122,9 +119,15 @@ const ContentsCard = ({
     setEditInsta(true);
   };
 
+  // 댓글달기
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // 코멘트 디스패치할 예쩡
+    dispatch(
+      postComments({
+        postId: postid,
+        content: content,
+      })
+    );
   };
 
   const onClickModalHandler = () => {
@@ -134,48 +137,52 @@ const ContentsCard = ({
 
   return (
     <>
-      {modalOpen && <ContentsCardDetail setModalOpen={setModalOpen} />}
-      <PostContainer key={postid} onSubmit={onSubmitHandler}>
+      {modalOpen && (
+        <ContentsCardDetail
+          setModalOpen={setModalOpen}
+          postid={postid}
+          img={img}
+          like={like}
+          username={username}
+          usercontent={usercontent}
+        />
+      )}
+      <PostContainer onSubmit={onSubmitHandler}>
         <PostHeader>
           <FirstHeader>
             <UserImg />
-            <UserLabel>{postid}</UserLabel>
+            <UserLabel>{username}</UserLabel>
           </FirstHeader>
           <BiDotsHorizontalRounded
-            style={{ paddingRight: '15px', cursor: 'pointer' }}
+            style={{ paddingRight: "15px", cursor: "pointer" }}
             onClick={onClickModalHandler}
           />
         </PostHeader>
         <PostImg>
-          <Slider {...settings}>
-            <div>
-              <img
-                src={image1}
-                style={{
-                  width: '100%',
-                  height: '500px',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-
-                }}
-              />
-            </div>
-          </Slider>
+          <img
+            src={img}
+            style={{
+              width: "100%",
+              height: "500px",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
         </PostImg>
 
         <LikeFirstBar>
           <LikeBarSection>
-            <AiOutlineHeart size="30" style={{ cursor: 'pointer' }} />
+            <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
             <IoChatbubbleOutline
               size="28"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               onClick={showModal}
             />
-            <IoPaperPlaneOutline size="28" style={{ cursor: 'pointer' }} />
+            <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
           </LikeBarSection>
           <IoBookmarkOutline
             size="27"
-            style={{ paddingRight: '10px', cursor: 'pointer' }}
+            style={{ paddingRight: "10px", cursor: "pointer" }}
           />
         </LikeFirstBar>
         <LikeSecondBar>
@@ -185,18 +192,18 @@ const ContentsCard = ({
         <ContentWrap>
           <ContentFirstSection>
             <UserLabel>{username}</UserLabel>
-            <PostContent>{content}</PostContent>
+            <PostContent>{usercontent}</PostContent>
           </ContentFirstSection>
           <CommentCount>댓글 0개 보기</CommentCount>
           <ContentTime>{posttime}</ContentTime>
         </ContentWrap>
         <CommentWrap>
           <CommentFirstSection>
-            <VscSmiley size="26" style={{ padding: '0 10px' }} />
+            <VscSmiley size="26" style={{ padding: "0 10px" }} />
             <CommentInput
               type="text"
-              name="comment"
-              value={comment}
+              name="content"
+              value={content}
               onChange={onChangeHandler}
             />
           </CommentFirstSection>

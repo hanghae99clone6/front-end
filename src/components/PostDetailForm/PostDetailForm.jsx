@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import {
   IoChatbubbleOutline,
@@ -10,21 +10,50 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import PostDetailFormComment from "../PostDetailFormComment/PostDetailFormComment";
 import { useState } from "react";
 import styled from "styled-components";
+import instance from "../../lib/instance";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-const PostDetailForm = (setModalOpen) => {
+const PostDetailForm = ({
+  setModalOpen,
+  like,
+  username,
+  usercontent,
+  time,
+  postid,
+}) => {
+  // const getcommentdata = async () => {
+  //   const data = await instance
+  //     .get(`api/comment/${postid}`)
+  //     .then((res) => {
+  //       console.log(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   getcommentdata();
+  // }, []);
+
+  console.log("123");
+
   const [userComment, setUserComment] = useState({
-    comment: "",
+    content: "",
   });
 
-  const { comment } = userComment;
+  const { content } = userComment;
 
   const onChangeHandler = (e) => {
+    e.preventDefault();
     const { value, name } = e.target;
     setUserComment({
       ...userComment,
       [name]: value,
     });
   };
+
   const onclicktest = (e) => {
     // 이벤트 버블링 막아주겟어 모달창이 자꾸 왜 꺼지는거야 ㅠㅠ
     e.stopPropagation();
@@ -35,7 +64,7 @@ const PostDetailForm = (setModalOpen) => {
       <PostHeader>
         <FirstHeader>
           <UserImg />
-          <UserLabel>이름</UserLabel>
+          <UserLabel>{username}</UserLabel>
         </FirstHeader>
         <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
       </PostHeader>
@@ -45,8 +74,8 @@ const PostDetailForm = (setModalOpen) => {
             <UserImg />
           </FirstSection>
           <SecondSection>
-            <UserLabel>이름</UserLabel>
-            <PostContent>내용</PostContent>
+            <UserLabel>{username}</UserLabel>
+            <PostContent>{usercontent}</PostContent>
           </SecondSection>
         </PostContentContainer>
         <PostBottom>
@@ -66,15 +95,15 @@ const PostDetailForm = (setModalOpen) => {
         />
       </LikeFirstBar>
       <LikeSecondBar>
-        <UserLikeLable>좋아요 500개</UserLikeLable>
-        <ContentTime>10월 31</ContentTime>
+        <UserLikeLable>좋아요 {like}개</UserLikeLable>
+        <ContentTime>{time}</ContentTime>
         <CommentWrap>
           <CommentFirstSection>
             <VscSmiley size="26" style={{ padding: "0 10px" }} />
             <CommentInput
               type="text"
-              name="comment"
-              value={comment}
+              name="content"
+              value={content}
               onChange={onChangeHandler}
             />
           </CommentFirstSection>
