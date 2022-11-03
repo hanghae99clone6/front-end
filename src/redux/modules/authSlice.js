@@ -14,6 +14,8 @@ export const addMemberThunk = createAsyncThunk(
     }
   }
 );
+// /api/member/login
+// /api/users/login
 
 // 로그인
 export const checkInMemberThunk = createAsyncThunk(

@@ -75,7 +75,7 @@ export const AuthFirstBoxUp = styled.div`
   align-items: center;
   justify-content: space-evenly;
 
-  height: 500px;
+  height: 600px;
 
   margin: 0 0 10px 0;
   padding: 10px 0 10px 0;
@@ -103,7 +103,7 @@ export const Input = styled.input`
   overflow: hidden;
 
   width: 270px;
-  height: 35px;
+  height: 30px;
 
   margin: 5px 0 0 0;
   padding: 9px 0 7px 8px;
@@ -116,15 +116,15 @@ export const Input = styled.input`
 
 export const AuthBtn = styled.div`
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 18px;
   text-align: center;
 
-  width: 270px;
+  width: 263px;
   height: 30px;
 
   margin: 15px 0 0 0;
-  padding: 5px 9px;
+  padding: 10px 10px 0 10px;
 
   color: white;
   background-color: #0095f6;

@@ -10,19 +10,23 @@ import { ReactComponent as HamburgerIcon } from '../img/HamburgerIcon.svg';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';
+import PostForm from './PostForm';
+import { useDispatch } from 'react-redux';
+import { checkOutMemberThunk } from '../redux/modules/authSlice';
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   //모달창 열기
-  const showModal = () => {
-    setIsModalOpen(!IsModalOpen);
+  const openModal = () => {
+    setModalOpen(true);
   };
 
   //모달창 닫기
   const closeModal = () => {
-    setIsModalOpen(false);
+    setModalOpen(false);
   };
 
   return (
@@ -83,12 +87,15 @@ const Sidebar = () => {
           {/* 만들기 */}
           <SidebarBtnWrapper>
             {/* 만들기 버튼을 누르면 모달이 나온다. */}
-            <SidebarBtnArea onClick={showModal}>
+            <SidebarBtnArea onClick={openModal}>
               <>
                 <AddPostIcon />
               </>
               <SidebarBtnText>만들기</SidebarBtnText>
             </SidebarBtnArea>
+            <Modal open={modalOpen} close={closeModal}>
+              <PostForm />
+            </Modal>
           </SidebarBtnWrapper>
           {/* 프로필 */}
         </SidebarBtnContainer>
@@ -98,16 +105,20 @@ const Sidebar = () => {
             <>
               <HamburgerIcon />
             </>
-            <SidebarBtnText>더 보기</SidebarBtnText>
+            <SidebarBtnText
+              onClick={() => {
+                dispatch(checkOutMemberThunk());
+                alert('로그아웃 되었습니다.');
+                navigate('/');
+                window.location.reload();
+              }}
+            >
+              로그아웃
+            </SidebarBtnText>
           </SidebarBtnArea>
         </SidebarBtnWrapper>
       </SidebarContainer>
     </StSidebar>
-
-    // {IsModalOpen? (
-    //   <Modal/>
-
-    // )}
   );
 };
 

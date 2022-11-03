@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Modal = ({ children }) => {
+const Modal = ({ children, open }) => {
   return (
-    <StModalPopUp>
-      <StModalPop>
-        <StModalBody>
-          <StModalBodyContent>
-            <StModalBodyTitleBox>{children}</StModalBodyTitleBox>
-          </StModalBodyContent>
-        </StModalBody>
-      </StModalPop>
-    </StModalPopUp>
+    <div className={open ? 'oepnModal modal' : 'modal'}>
+      {open ? (
+        <StModalPopUp>
+          <StModalPop>
+            <StModalBody>
+              <StModalBodyContent>
+                <StModalBodyTitleBox>{children}</StModalBodyTitleBox>
+              </StModalBodyContent>
+            </StModalBody>
+          </StModalPop>
+        </StModalPopUp>
+      ) : null}
+    </div>
   );
 };
 

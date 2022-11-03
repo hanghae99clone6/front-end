@@ -1,48 +1,94 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { addPostThunk } from '../redux/modules/postSlice';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-const PostForm = () => {
+const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
+const PostForm = ({ close }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [post, setPost] = useState({
+  const [imageUrl, setImageUrl] = useState({
     image: '',
+  });
+  const [postDto, setPostDto] = useState({
     content: '',
   });
-  const data = useSelector((state) => state);
+  const [file, setFile] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState(null);
 
+  // 이미지 미리보기
+  const changeHandler = (e) => {
+    setImageUrl({ ...imageUrl, image: e.target.files[0] });
+    const file = e.target.files[0];
+    if (!file.type.match(imageMimeType)) {
+      alert('Image mime type is not valid');
+      return;
+    }
+    setFile(file);
+  };
+  useEffect(() => {
+    let fileReader,
+      isCancel = false;
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setFileDataURL(result);
+        }
+      };
+      fileReader.readAsDataURL(file);
+    }
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    };
+  }, [file]);
+
+  // 이미지, 텍스트 업로드
   const onClick = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // 새로고침 방지
+    // formdata 만들기
     const formData = new FormData();
-    formData.append('imageUrl', post.image);
+    // image는 formdata로만 변환
+    // text는 formdata( new Blob ( JSON.stringify() )) 3단계를 거쳐서 변환
+    formData.append('imageUrl', imageUrl.image);
     formData.append(
       'postDto',
       new Blob(
         [
           JSON.stringify({
-            content: post.content,
+            content: postDto.content,
           }),
         ],
         { type: 'application/json' }
       )
     );
-
-    // if (post.content.trim() === '') {
-    //   alert('내용을 입력해주세요.');
-    // }
-
+    // content에 내용이 없으면 알림
+    if (postDto.content.trim() === '') {
+      alert('내용을 입력해주세요.');
+    }
+    // dispatch로 addPostThunk를 실행 formdata를 담아서 보냄
     dispatch(addPostThunk(formData));
+    // 그리고 홈화면으로 이동
     navigate('/home');
-    setPost('');
+    setPostDto('');
   };
 
   return (
     <StPostForm>
       <div>
         <PostFormHeader>
-          <div style={{ cursor: 'pointer' }}>이전으로</div>
+          <div
+            onClick={() => window.location.reload()}
+            style={{ cursor: 'pointer' }}
+          >
+            이전으로
+          </div>
           <div style={{ fontSize: '16px' }}>새 게시물 만들기</div>
           <div type="submit" onClick={onClick} style={{ cursor: 'pointer' }}>
             공유하기
@@ -51,19 +97,24 @@ const PostForm = () => {
       </div>
       <PostFormInput>
         <PostFormUpload>
-          {data !== undefined
-            ? data.imageUrl && <img src={data.imageUrl} alt="미리보기" />
-            : null}
-          <input
+          {fileDataURL ? (
+            <p className="img-preview-wrapper">
+              {<Img src={fileDataURL} alt="preview" />}
+            </p>
+          ) : null}
+          <Input
             type="file"
-            name="data"
-            onChange={(e) => setPost({ ...post, image: e.target.files[0] })}
+            id="image"
+            name="image"
+            accept=".png, .jpg, .jpeg"
+            onChange={changeHandler}
+            multiple
           />
         </PostFormUpload>
         <PostFormArea
           type="text"
           name="content"
-          onChange={(e) => setPost({ ...post, content: e.target.value })}
+          onChange={(e) => setPostDto({ ...postDto, content: e.target.value })}
           className="WriteFormArea"
           placeholder="문구 입력..."
         />
@@ -78,21 +129,18 @@ const StPostForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 `;
 
 const PostFormHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 
   font-size: 14px;
   font-weight: 500;
 
   width: 1000px;
   height: 42px;
-
-  padding: 0 20px;
 
   background-color: rgba(255, 255, 255);
   border: 1px solid rgba(168, 168, 168, 0.5);
@@ -111,6 +159,26 @@ const PostFormUpload = styled.div`
 
   width: 680px;
   height: 680px;
+
+  background-color: rgba(255, 255, 255);
+  border: 1px solid rgba(168, 168, 168, 0.5);
+  border-radius: 0 0 0 15px;
+`;
+
+const Input = styled.input`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Img = styled.img`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: 680px;
+  height: 680px;
+  object-fit: cover;
 
   background-color: rgba(255, 255, 255);
   border: 1px solid rgba(168, 168, 168, 0.5);
@@ -136,62 +204,3 @@ const PostFormArea = styled.textarea`
     outline: none;
   }
 `;
-
-// AWS.config.update({
-//   accessKeyId: ACCESS_KEY,
-//   secretAccessKey: SECRETACCESS_KEY,
-// });
-
-// const myBucket = new AWS.S3({
-//   params: { Bucket: S3_BUCKET },
-//   region: REGION,
-// });
-
-// const [progress, setProgress] = useState(0);
-// const [selectedFile, setSelectedFile] = useState(null);
-
-// const handleFileInput = (e) => {
-//   setSelectedFile(e.target.files[0]);
-// };
-
-// const uploadFile = (file) => {
-//   const params = {
-//     ACL: 'public-read',
-//     Body: file,
-//     Bucket: S3_BUCKET,
-//     Key: file.name,
-//   };
-
-//   myBucket
-//     .putObject(params)
-//     .on('httpUploadProgress', (evt) => {
-//       setProgress(Math.round((evt.loaded / evt.total) * 100));
-//     })
-//     .send((err) => {
-//       if (err) console.log(err);
-//     });
-// };
-
-// const S3_BUCKET = 'process.env.REACT_APP_BUCKET';
-// const REGION = 'process.env.REACT_APP_AWS_REGION';
-// const ACCESS_KEY = 'process.env.AWS_ACCESS_KEY_ID';
-// const SECRET_ACCESS_KEY = 'process.env.AWS_SECRET_ACCESS_KEY_ID';
-
-// const config = {
-//   bucketName: S3_BUCKET,
-//   region: REGION,
-//   accessKeyId: ACCESS_KEY,
-//   secretAccessKey: SECRET_ACCESS_KEY,
-// };
-
-// const [selectedFile, setSelectedFile] = useState(null);
-
-// const handleFileInput = (e) => {
-//   setSelectedFile(e.target.files[0]);
-// };
-
-// const handleUpload = async (file) => {
-//   uploadFile(file, config)
-//     .then((data) => console.log(data))
-//     .catch((err) => console.error(err));
-// };
